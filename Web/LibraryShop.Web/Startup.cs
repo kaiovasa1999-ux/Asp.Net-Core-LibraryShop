@@ -9,6 +9,7 @@
     using LibraryShop.Data.Repositories;
     using LibraryShop.Data.Seeding;
     using LibraryShop.Services.Data;
+    using LibraryShop.Services.Data.HomeService;
     using LibraryShop.Services.Mapping;
     using LibraryShop.Services.Messaging;
     using LibraryShop.Web.ViewModels;
@@ -65,6 +66,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IHomeService, HomeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

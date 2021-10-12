@@ -2,20 +2,25 @@
 {
     using System.Diagnostics;
 
+    using LibraryShop.Services.Data.HomeService;
     using LibraryShop.Web.ViewModels;
-
+    using LibraryShop.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
-        public IActionResult Index()
+        private readonly IHomeService homeService;
+
+        public HomeController(IHomeService homeService)
         {
-            return this.View();
+            this.homeService = homeService;
         }
 
-        public IActionResult Privacy()
+        public IActionResult Index()
         {
-            return this.View();
+            var viewModel = new IndexPageStatisticsViewModel();
+            viewModel = this.homeService.GetStatistics();
+            return this.View(viewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

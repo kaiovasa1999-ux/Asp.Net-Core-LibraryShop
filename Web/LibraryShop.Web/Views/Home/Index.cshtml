@@ -1,9 +1,36 @@
-﻿@using LibraryShop.Common
+﻿@model LibraryShop.Web.ViewModels.Home.IndexPageStatisticsViewModel
+
+@using LibraryShop.Common
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>We have:</p>
 </div>
+
+<div class="offset-1 container">
+    <div class="col-md-8"></div>
+    <table class="text-center table table-dark">
+        <thead>
+            <tr>
+                <th scope="col" class="text-primary">Users</th>
+                <th scope="col" class="text-primary">Dealer</th>
+                <th scope="col" class="text-primary">Books</th>
+                <th scope="col" class="text-primary">Book Geners</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-warning">@Model.TotalUsers</td>
+                <td class="text-warning">@Model.TotalDealers</td>
+                <td class="text-warning">@Model.TotalBooks</td>
+                <td class="text-warning">@Model.TotalBookGeners</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<html>
+
