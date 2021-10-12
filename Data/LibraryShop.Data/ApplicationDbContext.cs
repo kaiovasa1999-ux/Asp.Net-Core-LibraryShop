@@ -26,6 +26,14 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Book> Books { get; set; }
+
+        public DbSet<Dealer> Dealers { get; set; }
+
+        public DbSet<Genre> Genres { get; set; }
+
+        public DbSet<Basket> Baskets { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

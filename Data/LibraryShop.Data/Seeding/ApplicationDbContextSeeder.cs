@@ -27,6 +27,7 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              new BookGenerSeeder(),
                           };
 
             foreach (var seeder in seeders)
