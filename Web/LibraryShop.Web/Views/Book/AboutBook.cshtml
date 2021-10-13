@@ -1,0 +1,15 @@
+﻿@model LibraryShop.Web.ViewModels.Book.AboutBookViewModel
+
+@{ 
+    ViewBag.Title = Model.Title;
+}
+<h1>@ViewBag.Title</h1>
+<form method="get">
+    <div class="card col-md-3 form-group" style="width: 18rem;">
+        <img class="card-img-top" src="@Model.ImageUrl" alt="@Model.Author @Model.Title">
+        <div class="card-body">
+            <h5 class="card-title">Titel: @Model.Title</h5>
+            <p class="card-text">@Model.Description</p>
+        </div>
+    </div>
+</form>
