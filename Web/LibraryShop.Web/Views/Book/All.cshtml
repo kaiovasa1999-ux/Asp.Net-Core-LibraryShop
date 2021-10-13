@@ -20,9 +20,30 @@
     </div>
 </div>
 
-
 <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
+    <ul class="pagination">
+        @if (!Model.HasPreviousPage)
+        {
+            <li class="page-item disabled"><a class="page-link" asp-controller="Book" asp-action="All" asp-route-page="@Model.PreviousPage">Previous</a></li>
+
+        }
+        else
+        {
+            <li class="page-item"><a class="page-link" asp-controller="Book" asp-action="All" asp-route-page="@Model.PreviousPage">Previous</a></li>
+
+        }
+
+        @if (!Model.HasNextPage)
+        {
+            <li class="page-item disabled"><a class="page-link" asp-controller="Building" asp-action="All"  asp-route-page="@Model.NextPage">Next</a></li>
+        }
+        else
+        {
+            <li class="page-item "><a class="page-link" asp-controller="Building" asp-action="All" asp-route-page="@Model.NextPage">Next</a></li>
+        }
+    </ul>
+</nav>
+@*<ul class="pagination justify-content-center">
 
         @if (Model.HasePreviousPage)
         {
@@ -34,5 +55,4 @@
             <li class=" offset-1 "><a asp-controller="Building" asp-action="All" asp-route-page="@Model.NextPage">Next</a></li>
         }
 
-    </ul>
-</nav>
+    </ul>*@

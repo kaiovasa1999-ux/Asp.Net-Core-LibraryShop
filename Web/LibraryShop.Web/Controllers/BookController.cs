@@ -76,10 +76,14 @@
 
         public IActionResult All(int page = 1)
         {
-            var booksPerPage = 21;
-            var viewModel = new AllBooksLitingModel();
-            viewModel.Books = this.bookService.GetAllBooks(page, booksPerPage);
-            viewModel.TotalBooks = this.bookService.GetTotalBooks();
+            const int booksPerPage = 3;
+            var viewModel = new AllBooksLitingModel()
+            {
+                Page = page,
+                BooksPerPage = booksPerPage,
+                Books = this.bookService.GetAllBooks(page, booksPerPage),
+                TotalBooks = this.bookService.GetTotalBooks(),
+            };
 
             return this.View(viewModel);
         }
@@ -87,7 +91,6 @@
         public IActionResult AboutBook(AboutBookViewModel bookInput)
         {
             var book = this.bookService.GetDetails(bookInput);
-            ////var book = this.bookService.GetDetails(bookId);
             return this.View(book);
         }
     }
