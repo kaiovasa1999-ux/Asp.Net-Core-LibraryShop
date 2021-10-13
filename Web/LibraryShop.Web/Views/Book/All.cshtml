@@ -8,12 +8,12 @@
     <div class="row">
         @foreach (var book in Model.Books)
         {
-            <div class="card col-md-3" style="width: 18rem;">
+            <div class="card col-md-3 form-group" style="width: 18rem;">
                 <img class="card-img-top" src="@book.ImageUrl" alt="@book.Author @book.Title">
                 <div class="card-body">
                     <h5 class="card-title">Titel: @book.Title</h5>
                     <p class="card-text">@book.Descrptuin</p>
-                    <a asp-controller="Book" asp-action="About" asp-route-title="@book.Title" class="btn btn-primary">View More</a>
+                    <a asp-controller="Book" asp-action="About" asp-route-id="@book.Id" class="btn btn-primary">View More</a>
                 </div>
             </div>
         }
