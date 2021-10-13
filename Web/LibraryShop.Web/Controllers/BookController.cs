@@ -62,6 +62,7 @@
                 DealerId = delerid,
                 Pages = inputBook.Pages,
                 ImageUrl = inputBook.ImageUrl,
+                YearCreated = inputBook.YearCreated,
                 Price = inputBook.Price,
                 Description = inputBook.Description,
                 GenreId = inputBook.GenerID,
@@ -70,9 +71,17 @@
             await this.data.Books.AddAsync(bookData);
             await this.data.SaveChangesAsync();
 
-            /////await this.bookService.AddAsync(inputBook);
-
             return this.RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult All(int page = 1)
+        {
+            var booksPerPage = 21;
+            var viewModel = new AllBooksLitingModel();
+            viewModel.Books = this.bookService.GetAllBooks(page,booksPerPage);
+            viewModel.TotalBooks = this.bookService.GetTotalBooks();
+
+            return this.View(viewModel);
         }
     }
 }

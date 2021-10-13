@@ -1,0 +1,38 @@
+﻿@model LibraryShop.Web.ViewModels.Book.AllBooksLitingModel
+
+@{
+    ViewBag.Title = "All books/page " + Model.Page;
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var book in Model.Books)
+        {
+            <div class="card col-md-3" style="width: 18rem;">
+                <img class="card-img-top" src="@book.ImageUrl" alt="@book.Author @book.Title">
+                <div class="card-body">
+                    <h5 class="card-title">Titel: @book.Title</h5>
+                    <p class="card-text">@book.Descrptuin</p>
+                    <a asp-controller="Book" asp-action="About" asp-route-title="@book.Title" class="btn btn-primary">View More</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+
+        @if (Model.HasePreviousPage)
+        {
+            <li class="page-item"><a asp-controller="Book" asp-action="All" asp-route-page="@Model.PreviousPage">Previous</a></li>
+        }
+
+        @if (Model.HasNextPage)
+        {
+            <li class=" offset-1 "><a asp-controller="Building" asp-action="All" asp-route-page="@Model.NextPage">Next</a></li>
+        }
+
+    </ul>
+</nav>
