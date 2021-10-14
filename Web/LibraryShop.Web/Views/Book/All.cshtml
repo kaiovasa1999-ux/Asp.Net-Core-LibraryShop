@@ -1,8 +1,49 @@
 ﻿@model LibraryShop.Web.ViewModels.Book.AllBooksLitingModel
 
 @{
-    ViewBag.Title = "All books/page " + Model.Page;
+    ViewBag.Title = "All books/page " + Model.Id;
 }
+<form method="get">
+    <div class="form-group col-md-4">
+        <label asp-for="Gener">Sort by Gener:</label>
+        <select asp-for="Gener" class="form-control">
+            <option value="">All</option>
+            @foreach (var category in Model.Geners)
+            {
+                <option value="@category">@category</option>
+            }
+        </select>
+    </div>
+    <div class="form-group col-md-4">
+        <label asp-for="Title">Title</label>
+        <select asp-for="Title" class="form-control">
+            <option value="">Title</option>
+            @foreach (var brand in Model.AllBooksTitles)
+            {
+                <option value="@brand">@brand</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchTerm">Search by text</label>
+        <input asp-for="SearchTerm">
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label asp-for="Sorting">Sorting</label>
+            <select asp-for="Sorting" class="form-control">
+                <option value="">
+                    All
+                </option>
+                <option value="0">Book price</option>
+                <option value="1">Book pages</option>
+                <option value="2">Book Author Name</option>
+                <option value="3">Year created</option>
+            </select>
+        </div>
+    </div>
+</form>
+
 
 <div class="container">
     <div class="row">
@@ -24,22 +65,22 @@
     <ul class="pagination">
         @if (!Model.HasPreviousPage)
         {
-            <li class="page-item disabled"><a class="page-link" asp-controller="Book" asp-action="All" asp-route-page="@Model.PreviousPage">Previous</a></li>
+            <li class="page-item disabled"><a class="page-link" asp-controller="Book" asp-action="All" asp-route-page="@(Model.Id -1)">Previous</a></li>
 
         }
         else
         {
-            <li class="page-item"><a class="page-link" asp-controller="Book" asp-action="All" asp-route-page="@Model.PreviousPage">Previous</a></li>
+            <li class="page-item"><a class="page-link" asp-controller="Book" asp-action="All" asp-route-page="@(Model.Id - 1)">Previous</a></li>
 
         }
 
         @if (!Model.HasNextPage)
         {
-            <li class="page-item disabled"><a class="page-link" asp-controller="Building" asp-action="All"  asp-route-page="@Model.NextPage">Next</a></li>
+            <li class="page-item disabled"><a class="page-link" asp-controller="Book" asp-action="All" asp-route-id="@(Model.Id + 1)">Next</a></li>
         }
         else
         {
-            <li class="page-item "><a class="page-link" asp-controller="Building" asp-action="All" asp-route-page="@Model.NextPage">Next</a></li>
+            <li class="page-item "><a class="page-link" asp-controller="Book" asp-action="All" asp-route-id="@(Model.Id + 1)">Next</a></li>
         }
     </ul>
 </nav>
