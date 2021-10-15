@@ -1,8 +1,10 @@
 ﻿namespace LibraryShop.Web.Controllers
 {
+    using System;
     using System.Linq;
 
     using LibraryShop.Data;
+    using LibraryShop.Data.Common.Repositories;
     using LibraryShop.Data.Models;
     using LibraryShop.Web.ClaimsExtnesions;
     using LibraryShop.Web.ViewModels.Dealer;
@@ -12,9 +14,11 @@
     public class DealerController : Controller
     {
         private readonly ApplicationDbContext data;
+        private readonly IDeletableEntityRepository<Dealer> dealrsRepository;
 
-        public DealerController(ApplicationDbContext data)
+        public DealerController(ApplicationDbContext data, IDeletableEntityRepository<Dealer> dealrsRepository)
         {
+            this.dealrsRepository = dealrsRepository;
             this.data = data;
         }
 
@@ -36,9 +40,9 @@
 
             var userId = this.User.GetId();
 
-            if (this.IsDealer())
+            if (this.dealrsRepository.All().Any(d => d.UserId == userId))
             {
-                return this.BadRequest();
+                throw new Exception("You are allready a dealer");
             }
 
             var dealerDarta = new Dealer()

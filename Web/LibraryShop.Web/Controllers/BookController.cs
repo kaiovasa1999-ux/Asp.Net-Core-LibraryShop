@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using LibraryShop.Data;
+    using LibraryShop.Data.Common.Repositories;
     using LibraryShop.Data.Models;
     using LibraryShop.Services.Data.BookService;
     using LibraryShop.Services.Data.Dealer;
@@ -17,15 +18,18 @@
         private readonly IBookService bookService;
         private readonly ApplicationDbContext data;
         private readonly IDealerService dealerService;
+        private readonly IDeletableEntityRepository<Book> bookRepository;
 
         public BookController(
             IBookService bookService,
             ApplicationDbContext data,
-            IDealerService dealerService)
+            IDealerService dealerService,
+            IDeletableEntityRepository<Book> bookRepository)
         {
             this.bookService = bookService;
             this.data = data;
             this.dealerService = dealerService;
+            this.bookRepository = bookRepository;
         }
 
         [Authorize]
@@ -74,18 +78,28 @@
             return this.RedirectToAction("Index", "Home");
         }
 
-        public IActionResult All(int page = 1)
+        [HttpGet]
+        public IActionResult All([FromQuery] AllBooksListingAndSortingViewModel query)
         {
-            const int booksPerPage = 3;
-            var viewModel = new AllBooksLitingModel()
-            {
-                Page = page,
-                BooksPerPage = booksPerPage,
-                Books = this.bookService.GetAllBooks(page, booksPerPage),
-                TotalBooks = this.bookService.GetTotalBooks(),
-            };
+            var queryResult = this.bookService.All(
+                query.Author,
+                query.Gener,
+                query.Title,
+                query.SearchTherm,
+                query.Sorting,
+                query.CurrentPage,
+                AllBooksListingAndSortingViewModel.BooksPerPage);
 
-            return this.View(viewModel);
+            var booksGenres = this.bookService.GetGenerName();
+            var booksTitles = this.bookService.GetAllBooksTitles();
+            var totalBooks = this.bookService.GetTotalBooks();
+
+            query.Books = queryResult.Books;
+            query.Geners = booksGenres;
+            query.TotalBooks = totalBooks;
+            query.Titles = booksTitles;
+
+            return this.View(query);
         }
 
         public IActionResult AboutBook(AboutBookViewModel bookInput)
