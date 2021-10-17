@@ -1,16 +1,46 @@
 ﻿@model LibraryShop.Web.ViewModels.Book.AllBooksListingAndSortingViewModel
 
+<div class="input-group col-md-4">
+    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+           aria-describedby="search-addon" />
+    <button type="button" class="btn btn-outline-primary">search</button>
+</div>
 
-<div class="row">
+<div class="row form-group">
     @foreach (var book in Model.Books)
     {
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="@book.ImageUrl" alt="Card image cap">
+            <img class="card-img-top" src="@book.ImageUrl" alt="@book.Title @book.Author">
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a asp-action="AboutBook" asp-route-id ="@book.Id" class="btn btn-primary">About</a>
+                <p class="card-text">@book.Descrption</p>
+                <a asp-action="AboutBook" asp-route-id="@book.Id" class="btn btn-primary">About</a>
             </div>
         </div>
     }
 </div>
+
+<nav aria-label="Page navigation example" class="offset-4">
+    <ul class="pagination">
+        @if (Model.HasPrevPage)
+        {
+            <li class="page-item"><a class="page-link" asp-action="All" asp-route-id="@Model.PrevPage">Previous</a></li>
+        }
+        else
+        {
+            <li class="page-item disabled"><a class="page-link" asp-action="All" asp-route-id="@Model.PrevPage">Previous</a></li>
+        }
+
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        @if (Model.HasPrevPage)
+        {
+            <li class="page-item"><a class="page-link" asp-action="All" asp-route-id="@Model.NextPage">Next</a></li>
+        }
+        else
+        {
+            <li class="page-item disabled"><a class="page-link" asp-action="All" asp-route-id="@Model.NextPage">Next</a></li>
+        }
+    </ul>
+</nav>
