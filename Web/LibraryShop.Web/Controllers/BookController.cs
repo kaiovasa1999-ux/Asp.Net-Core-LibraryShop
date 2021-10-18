@@ -117,6 +117,7 @@
             return this.View(book);
         }
 
+        [Authorize]
         public IActionResult MyBooks(MyBooksViewModel inputBook)
         {
             string userId = this.User.GetId();
