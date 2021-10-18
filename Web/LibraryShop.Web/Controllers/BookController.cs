@@ -1,5 +1,6 @@
 ﻿ namespace LibraryShop.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -35,6 +36,13 @@
         [Authorize]
         public IActionResult Add()
         {
+            var isDealer = this.dealerService.GetDealerIByItUserId(this.User.GetId());
+
+            if (isDealer == 0)
+            {
+                return this.RedirectToAction("Error", "Dealer");
+            }
+
             var viewModel = new AddBookFormModel();
             viewModel.Geners = this.bookService.GetAllGeners();
             return this.View(viewModel);
@@ -44,18 +52,18 @@
         [Authorize]
         public async Task<IActionResult> Add(AddBookFormModel inputBook)
         {
+            var isDealer = this.dealerService.GetDealerIByItUserId(this.User.GetId());
+
+            if (isDealer == 0)
+            {
+                return this.RedirectToAction("ErrorPage", "View");
+            }
+
             var userId = this.User.GetId();
             if (!this.ModelState.IsValid)
             {
                 inputBook.Geners = this.bookService.GetAllGeners();
                 return this.View(inputBook);
-            }
-
-            var isDealer = this.dealerService.GetDealerIByItUserId(this.User.GetId());
-            var userIsDealer = this.data.Dealers.Any(d => d.UserId == userId);
-            if (isDealer == 0)
-            {
-                return this.RedirectToAction("ErrorPage", "View");
             }
 
             var delerid = this.dealerService.GetDealerIByItUserId(userId);

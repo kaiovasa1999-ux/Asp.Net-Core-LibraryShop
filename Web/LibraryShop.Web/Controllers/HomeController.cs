@@ -4,6 +4,7 @@
 
     using LibraryShop.Services.Data.HomeService;
     using LibraryShop.Web.ViewModels;
+    using LibraryShop.Web.ViewModels.Book;
     using LibraryShop.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@
         {
             var viewModel = new IndexPageStatisticsViewModel();
             viewModel = this.homeService.GetStatistics();
+            viewModel.BooksImages = this.homeService.GetBooksImages();
             return this.View(viewModel);
         }
 

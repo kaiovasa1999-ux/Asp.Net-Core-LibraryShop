@@ -57,9 +57,14 @@
             return this.RedirectToAction("Index", "Home");
         }
 
-        private bool IsDealer()
+        public IActionResult Error()
         {
-            return this.data.Dealers.Any(d => d.UserId == this.User.GetId());
+            return this.View();
         }
+
+        ////private bool IsDealer()
+        ////{
+        ////    return this.data.Dealers.Any(d => d.UserId == this.User.GetId());
+        ////}
     }
 }
