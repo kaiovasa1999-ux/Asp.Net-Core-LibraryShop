@@ -1,0 +1,15 @@
+﻿@model LibraryShop.Web.ViewModels.Book.MyBooksViewModel
+
+
+<div class="row form-group">
+    @foreach (var book in Model.MyBooks)
+    {
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="@book.ImageUrl" alt="@book.Title @book.Author">
+            <div class="card-body">
+                <p class="card-text">@book.Descrption</p>
+                <a asp-action="AboutBook" asp-route-id="@book.Id" class="btn btn-primary">About</a>
+            </div>
+        </div>
+    }
+</div>

@@ -41,7 +41,7 @@
     </div>
 </form>
 
-@if (!Model.Books.Any()) 
+@if (!Model.Books.Any())
 {
     <h2 class="text-center text-danger">There are't any avaiable books in our library:</h2>
 }
@@ -55,6 +55,7 @@
                 <h5 class="card-title">Card title</h5>
                 <p class="card-text">@book.Descrption</p>
                 <a asp-action="AboutBook" asp-route-id="@book.Id" class="btn btn-primary">About</a>
+                <a asp-controller="Basket" asp-action="AddItem" asp-route-id="@book.Id" class="btn btn-success">Buy</a>
             </div>
         </div>
     }
