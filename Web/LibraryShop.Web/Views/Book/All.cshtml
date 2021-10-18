@@ -1,10 +1,50 @@
 ﻿@model LibraryShop.Web.ViewModels.Book.AllBooksListingAndSortingViewModel
 
-<div class="input-group col-md-4">
-    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-           aria-describedby="search-addon" />
-    <button type="button" class="btn btn-outline-primary">search</button>
-</div>
+<form method="get">
+    <div class="form-group col-md-4">
+        <label asp-for="Gener">Sort by Gener:</label>
+        <select asp-for="Gener" class="form-control">
+            <option value="">All</option>
+            @foreach (var category in Model.Geners)
+            {
+                <option value="@category">@category</option>
+            }
+        </select>
+    </div>
+    <div class="form-group col-md-4">
+        <label asp-for="Title">Title</label>
+        <select asp-for="Title" class="form-control">
+            <option value="">All</option>
+            @foreach (var brand in Model.Titles)
+            {
+                <option value="@brand">@brand</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="SearchTherm">Search by text:</label>
+        <input asp-for="SearchTherm">
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label asp-for="Sorting">Sorting</label>
+            <select asp-for="Sorting" class="form-control">
+                <option value="">
+                    All
+                </option>
+                <option value="0">Price</option>
+                <option value="1">Pages</option>
+                <option value="2">Author Name</option>
+                <option value="3">Year Created</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+@if (!Model.Books.Any()) 
+{
+    <h2 class="text-center text-danger">There are't any avaiable books in our library:</h2>
+}
 
 <div class="row form-group">
     @foreach (var book in Model.Books)
