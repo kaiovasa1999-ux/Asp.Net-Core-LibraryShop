@@ -51,8 +51,9 @@
                 return this.View(inputBook);
             }
 
+            var isDealer = this.dealerService.GetDealerIByItUserId(this.User.GetId());
             var userIsDealer = this.data.Dealers.Any(d => d.UserId == userId);
-            if (!userIsDealer)
+            if (isDealer == 0)
             {
                 return this.RedirectToAction("ErrorPage", "View");
             }
@@ -106,6 +107,14 @@
         {
             var book = this.bookService.GetDetails(bookInput);
             return this.View(book);
+        }
+
+        public IActionResult MyBooks(MyBooksViewModel inputBook)
+        {
+            string userId = this.User.GetId();
+            inputBook.MyBooks = this.bookService.ByDealer(userId);
+
+            return this.View(inputBook);
         }
     }
 }
