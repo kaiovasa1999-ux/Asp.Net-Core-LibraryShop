@@ -9,6 +9,7 @@
     using LibraryShop.Data.Repositories;
     using LibraryShop.Data.Seeding;
     using LibraryShop.Services.Data;
+    using LibraryShop.Services.Data.BasketService;
     using LibraryShop.Services.Data.BookService;
     using LibraryShop.Services.Data.Dealer;
     using LibraryShop.Services.Data.HomeService;
@@ -71,6 +72,7 @@
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IBookService, BookService>();
             services.AddTransient<IDealerService, DealerService>();
+            services.AddTransient<IBasketService, BasketService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
