@@ -43,7 +43,7 @@
 
 @if (!Model.Books.Any())
 {
-    <h2 class="text-center text-danger">There are't any avaiable books in our library:</h2>
+<h2 class="text-center text-danger">There are't any avaiable books in our library by this criteria!</h2>
 }
 
 <div class="row form-group">
@@ -52,10 +52,9 @@
         <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="@book.ImageUrl" alt="@book.Title @book.Author">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
                 <p class="card-text">@book.Descrption</p>
                 <a asp-action="AboutBook" asp-route-id="@book.Id" class="btn btn-primary">About</a>
-                <a asp-controller="Basket" asp-action="AddItem" asp-route-id="@book.Id" class="btn btn-success">Buy</a>
+                <a asp-controller="Basket" asp-action="AddToBasket" asp-route-id="@book.Id" class="btn btn-success">Buy</a>
             </div>
         </div>
     }

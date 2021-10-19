@@ -1,4 +1,4 @@
-﻿@model BaskteViewModel
+﻿@*@model BaskteViewModel
 
 <div class="container px-4 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
@@ -21,38 +21,40 @@
     </div>
     @if (Model.BasketItems == null)
     {
-<h4>There are't any items in your bag!</h4> }
-else
-{
-@foreach (var item in Model.BasketItems)
-{
-<div class="row d-flex justify-content-center border-top">
-    <div class="col-5">
-        <div class="row d-flex">
-            <div class="book"> <img src="@Model.BasketItems[0].ImageUrl" class="book-img"> </div>
-            <div class="my-auto flex-column d-flex pad-left">
-                <h6 class="mob-text">Title: @Model.Title</h6>
-                <p class="mob-text">Author: Model.Author</p>
-            </div>
-        </div>
-    </div>
-    <div class="my-auto col-7">
-        <div class="row text-right">
-            <div class="col-4">
-                <p class="mob-text">Book</p>
-            </div>
-            <div class="col-4">
-                <div class="row d-flex justify-content-end px-3">
-                    <p class="mb-0" id="cnt1">1</p>
-                    <div class="d-flex flex-column plus-minus"> <span class="vsm-text plus">+</span> <span class="vsm-text minus">-</span> </div>
+        <h4>There are't any items in your bag!</h4>
+    }
+    else
+    {
+    @foreach (var item in Model.BasketItems)
+    {
+        <div class="row d-flex justify-content-center border-top">
+            <div class="col-5">
+                <div class="row d-flex">
+                    <div class="book"> <img src="@Model.BasketItems[0].ImageUrl" class="book-img"> </div>
+                    <div class="my-auto flex-column d-flex pad-left">
+                        <h6 class="mob-text">Title: @Model.Title</h6>
+                        <p class="mob-text">Author: Model.Author</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-4">
-                <h6 class="mob-text">$@Model.Price</h6>
+            <div class="my-auto col-7">
+                <div class="row text-right">
+                    <div class="col-4">
+                        <p class="mob-text">Book</p>
+                    </div>
+                    <div class="col-4">
+                        <div class="row d-flex justify-content-end px-3">
+                            <p class="mb-0" id="cnt1">1</p>
+                            <div class="d-flex flex-column plus-minus"> <span class="vsm-text plus">+</span> <span class="vsm-text minus">-</span> </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <h6 class="mob-text">$@Model.Price</h6>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>}
+        }
 
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
@@ -100,4 +102,4 @@ else
                         </div>
                     </div>
                 </div>}
-</div>
+</div>*@

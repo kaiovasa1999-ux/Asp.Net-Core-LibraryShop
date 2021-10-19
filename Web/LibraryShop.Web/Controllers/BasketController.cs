@@ -1,8 +1,7 @@
 ﻿namespace LibraryShop.Web.Controllers
 {
     using LibraryShop.Services.Data.BasketService;
-    using LibraryShop.Web.ViewModels.Basket;
-    using Microsoft.AspNetCore.Authorization;
+    using LibraryShop.Web.ClaimsExtnesions;
     using Microsoft.AspNetCore.Mvc;
 
     public class BasketController : Controller
@@ -14,10 +13,11 @@
             this.basketService = basketService;
         }
 
-        [Authorize]
-        public IActionResult MyBasket(BaskteViewModel basketView)
+        public IActionResult AddToBasket(int id, string userId)
         {
-            return this.View(basketView);
+            userId = this.User.GetId();
+            this.basketService.AddToBasket(id, userId);
+            return this.View();
         }
     }
 }

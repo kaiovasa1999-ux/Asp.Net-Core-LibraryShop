@@ -66,13 +66,13 @@
                 return this.View(inputBook);
             }
 
-            var delerid = this.dealerService.GetDealerIByItUserId(userId);
+            var delerId = this.dealerService.GetDealerIByItUserId(userId);
 
             var bookData = new Book()
             {
                 Author = inputBook.Author,
                 Title = inputBook.Title,
-                DealerId = delerid,
+                DealerId = delerId,
                 Pages = inputBook.Pages,
                 ImageUrl = inputBook.ImageUrl,
                 YearCreated = inputBook.YearCreated,
