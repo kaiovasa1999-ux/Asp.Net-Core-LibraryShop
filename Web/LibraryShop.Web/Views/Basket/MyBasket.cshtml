@@ -1,4 +1,4 @@
-﻿@*@model BaskteViewModel
+﻿@model LibraryShop.Web.ViewModels.Basket.BaskteViewModel
 
 <div class="container px-4 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
@@ -19,21 +19,22 @@
             </div>
         </div>
     </div>
-    @if (Model.BasketItems == null)
+    @*@if (Model.BooksInBasket == null)
     {
         <h4>There are't any items in your bag!</h4>
     }
+
     else
     {
-    @foreach (var item in Model.BasketItems)
-    {
+    @foreach (var item in Model.BooksInBasket)
+    {*@
         <div class="row d-flex justify-content-center border-top">
             <div class="col-5">
                 <div class="row d-flex">
-                    <div class="book"> <img src="@Model.BasketItems[0].ImageUrl" class="book-img"> </div>
+                    <div class="book"> <img src="" class="book-img"> </div>
                     <div class="my-auto flex-column d-flex pad-left">
-                        <h6 class="mob-text">Title: @Model.Title</h6>
-                        <p class="mob-text">Author: Model.Author</p>
+                        <h6 class="mob-text">Title: </h6>
+                        <p class="mob-text">Author: </p>
                     </div>
                 </div>
             </div>
@@ -49,12 +50,12 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <h6 class="mob-text">$@Model.Price</h6>
+                        <h6 class="mob-text">$</h6>
                     </div>
                 </div>
             </div>
         </div>
-        }
+    }
 
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
@@ -87,7 +88,7 @@
                                 <div class="col-lg-4 mt-2">
                                     <div class="row d-flex justify-content-between px-4">
                                         <p class="mb-1 text-left">Subtotal</p>
-                                        <h6 class="mb-1 text-right">$@Model.ItemsTotalPrice</h6>
+                                        <h6 class="mb-1 text-right">$</h6>
                                     </div>
                                     <div class="row d-flex justify-content-between px-4">
                                         <p class="mb-1 text-left">Shipping</p>
@@ -95,11 +96,12 @@
                                     </div>
                                     <div class="row d-flex justify-content-between px-4" id="tax">
                                         <p class="mb-1 text-left">Total (tax included)</p>
-                                        <h6 class="mb-1 text-right">$@Model.TotalPrice</h6>
-                                    </div> <button class="btn-block btn-blue"> <span> <span id="checkout">Checkout</span> <span id="check-amt">$@Model.TotalPrice</span> </span> </button>
+                                        <h6 class="mb-1 text-right">$</h6>
+                                    </div> <button class="btn-block btn-blue"> <span> <span id="checkout">Checkout</span> <span id="check-amt">$</span> </span> </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>}
-</div>*@
+                </div>
+                }
+</div>
