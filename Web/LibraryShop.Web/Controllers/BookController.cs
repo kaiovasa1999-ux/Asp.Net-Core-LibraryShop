@@ -84,6 +84,8 @@
             await this.data.Books.AddAsync(bookData);
             await this.data.SaveChangesAsync();
 
+            this.TempData["Message"] = "Book added succesfuly!";
+
             return this.RedirectToAction("Index", "Home");
         }
 
