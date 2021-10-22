@@ -66,7 +66,8 @@
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
-            // Application services
+            //// Application services 
+            ////(x => new SendGridEmailSender(apiKey here -> ""))
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IHomeService, HomeService>();
@@ -95,8 +96,10 @@
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
+                app.UseDeveloperExceptionPage();
+                app.UseMigrationsEndPoint();
+                ////app.UseExceptionHandler("/Home/Error");
+                ////app.UseHsts();
             }
 
             app.UseHttpsRedirection();

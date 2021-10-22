@@ -113,6 +113,14 @@
             return this.View(query);
         }
 
+        [Authorize]
+        [HttpPost]
+        public IActionResult EditBook(EditbookFormModel input)
+        {
+
+            return this.View();
+        }
+
         public IActionResult AboutBook(AboutBookViewModel bookInput)
         {
             var book = this.bookService.GetDetails(bookInput);
