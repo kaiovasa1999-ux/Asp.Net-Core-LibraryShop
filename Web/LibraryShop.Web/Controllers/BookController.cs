@@ -117,7 +117,6 @@
         [HttpPost]
         public IActionResult EditBook(EditbookFormModel input)
         {
-
             return this.View();
         }
 

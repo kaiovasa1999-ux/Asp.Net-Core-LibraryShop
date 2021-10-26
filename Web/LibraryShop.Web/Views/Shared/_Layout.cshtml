@@ -1,7 +1,9 @@
 ﻿@using LibraryShop.Common
+@using Microsoft.AspNetCore.Identity
 @using LibraryShop.Web.ClaimsExtnesions;
 @using LibraryShop.Data.Repositories;
 @using LibraryShop.Data;
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,19 +41,26 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Dealer" asp-action="Become">Become Dealer</a>
                         </li>
+                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dealers" asp-action="Index">Admin Panel</a>
+                            </li>   
+                        }
+
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    
+
     <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @this.RenderBody()
         </main>
     </div>
-    
+
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

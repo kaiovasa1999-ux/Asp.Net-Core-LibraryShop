@@ -16,6 +16,12 @@
       "commandName": "Project",
       "launchBrowser": true,
       "ErrorString": "Unexpected character encountered while parsing value: +. Path '', line 0, position 0."
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "launchBrowser": true,
+      "environmentVariables": {},
+      "distributionName": ""
     }
   }
 }
