@@ -21,7 +21,7 @@
         {
             var viewModel = new IndexPageStatisticsViewModel();
             viewModel = this.homeService.GetStatistics();
-            viewModel.BooksImages = this.homeService.GetBooksImages();
+            viewModel.BooksImages = this.homeService.GetBooksImagesRandom();
             return this.View(viewModel);
         }
 

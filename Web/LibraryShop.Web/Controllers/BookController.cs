@@ -1,4 +1,4 @@
-﻿ namespace LibraryShop.Web.Controllers
+﻿namespace LibraryShop.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -114,10 +114,27 @@
         }
 
         [Authorize]
-        [HttpPost]
-        public IActionResult EditBook(EditbookFormModel input)
+        public IActionResult EditBook(int id)
         {
-            return this.View();
+            var inputModel = this.bookService.GetById(id);
+            inputModel.Id = id;
+            inputModel.Geners = this.bookService.GetAllGeners();
+            // TOTO: Load book information
+            return this.View(inputModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> EditBook(int id, EditbookFormModel book)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            await this.bookService.UpdateAsync(id, book);
+
+            return this.RedirectToAction(nameof(this.AboutBook), new { id });
         }
 
         public IActionResult AboutBook(AboutBookViewModel bookInput)

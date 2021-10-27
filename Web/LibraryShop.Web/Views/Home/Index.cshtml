@@ -4,14 +4,16 @@
 @{
     this.ViewData["Title"] = "Home Page";
 }
-@if (this.TempData.ContainsKey("Message")) 
-{ 
+@if (this.TempData.ContainsKey("Message"))
+{
     <div class="alert alert-success">@this.TempData["Message"]</div>
 }
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
     <p>We have:</p>
 </div>
+
+
 
 <div class="offset-1 container">
     <div class="col-md-8"></div>
