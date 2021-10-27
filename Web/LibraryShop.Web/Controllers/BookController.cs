@@ -170,5 +170,14 @@
 
             return this.View(inputBook);
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> DeleteBook(int id)
+        {
+            await this.bookService.DeleteAsync(id);
+            this.TempData["BookDeleted"] = "Book was delete succesfuly!";
+            return this.RedirectToAction(nameof(this.AboutBook));
+        }
     }
 }
