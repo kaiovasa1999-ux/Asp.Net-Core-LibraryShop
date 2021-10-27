@@ -116,10 +116,19 @@
         [Authorize]
         public IActionResult EditBook(int id)
         {
-            var inputModel = this.bookService.GetById(id);
+            var userId = this.User.GetId();
+            var inputModel = this.bookService.GetById(id, this.User.GetId());
             inputModel.Id = id;
+            var bookDealer = inputModel.BookDealerUserId;
             inputModel.Geners = this.bookService.GetAllGeners();
-            // TOTO: Load book information
+
+            if (!this.dealerService.IsTheSameDealer(bookDealer))
+            {
+                this.TempData["WrongUser"] = "This book is not added by you!";
+
+                return this.RedirectToAction("Become", "Dealer");
+            }
+
             return this.View(inputModel);
         }
 
@@ -130,6 +139,16 @@
             if (!this.ModelState.IsValid)
             {
                 return this.View();
+            }
+
+            var bookDealer = book.BookDealerUserId;
+            var userId = this.User.GetId();
+
+            if (!this.dealerService.IsTheSameDealer(userId))
+            {
+                this.TempData["WrongUser"] = "This book is not added by you!";
+
+                return this.RedirectToAction("Become", "Dealer");
             }
 
             await this.bookService.UpdateAsync(id, book);

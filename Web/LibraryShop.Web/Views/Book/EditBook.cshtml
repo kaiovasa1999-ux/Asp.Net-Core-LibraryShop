@@ -1,0 +1,58 @@
+﻿@model LibraryShop.Web.ViewModels.Book.EditbookFormModel
+@{ 
+    ViewBag.Tilte = "Edit Book";
+}
+
+<h3>@ViewBag.Title</h3>
+
+<div class="row">
+    <div class="offset-md-3 col-md-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Author">Author Name:</label>
+                <input asp-for="Author">
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title">Book Title</label>
+                <input asp-for="Title">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pages">Book Pages</label>
+                <input asp-for="Pages">
+                <span asp-validation-for="Pages" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price">Book Price</label>
+                <input asp-for="Price">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl">Book Image</label>
+                <input asp-for="ImageUrl">
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YearCreated">Book Image</label>
+                <input asp-for="YearCreated">
+                <span asp-validation-for="YearCreated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input asp-for="Description">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GenerId">Book Gener</label>
+                <select asp-for="GenerId">
+                    @foreach (var gener in Model.Geners)
+                    {
+                        <option value="@gener.Id">@gener.Name</option>
+                    }
+                </select>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Save" />
+        </form>
+    </div>
+</div>

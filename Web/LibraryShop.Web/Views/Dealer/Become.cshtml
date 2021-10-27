@@ -1,5 +1,10 @@
 ﻿@model LibraryShop.Web.ViewModels.Dealer.BecomeDealerFormModel
 
+@if (TempData.ContainsKey("WrongUser"))
+{
+    <div class="alert alert-danger">@this.TempData["WrongUser"]</div>
+}
+
 <div class="row">
     <div class="offset-md-3 col-md-6">
         <form method="post">
