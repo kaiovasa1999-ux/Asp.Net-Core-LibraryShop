@@ -15,20 +15,16 @@
             <div class="card-body">
                 <p class="card-text">@book.Descrption</p>
                 <a asp-action="EditBook" asp-route-id="@book.Id" class="btn btn-warning">Edit</a>
-                <form asp-action="DeleteBook" asp-route-id="@book.Id" ></form>
-                <button class="btn btn-danger"data-toggle="modal" data-target="#deleteBook">Delete</button>
+                <form asp-action="DeleteBook" asp-route-id="@book.Id" method="post" id="deleteForm">
+                </form>
                 <a asp-action="AboutBook" asp-route-id="@book.Id" class="btn btn-primary">About</a>
+                <input class="btn btn-danger" type="submit" value="Delete" data-toggle="modal" data-target="#modalDelete">
             </div>
         </div>
-
     }
 </div>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-</button>
-
-<div class="modal fade" id="deleteBook" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -42,7 +38,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-danger" onclick="deleteBook.submit()">Yes</button>
+                <button type="button" class="btn btn-danger" onclick="deleteForm.submit()">Yes</button>
             </div>
         </div>
     </div>

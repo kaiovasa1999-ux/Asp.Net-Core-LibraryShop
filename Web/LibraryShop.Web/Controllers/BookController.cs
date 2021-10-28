@@ -171,8 +171,8 @@
             return this.View(inputBook);
         }
 
-        [Authorize]
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> DeleteBook(int id)
         {
             await this.bookService.DeleteAsync(id);

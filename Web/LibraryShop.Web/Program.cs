@@ -1,7 +1,11 @@
 ﻿namespace LibraryShop.Web
 {
+    using System;
+
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
+    using Twilio;
+    using Twilio.Rest.Api.V2010.Account;
 
     public static class Program
     {
@@ -15,6 +19,18 @@
                 .ConfigureWebHostDefaults(webBuilder =>
                     {
                         webBuilder.UseStartup<Startup>();
+                        string accountSid = Environment.GetEnvironmentVariable("Hakera");
+                        string authToken = Environment.GetEnvironmentVariable("twilioauth");
+
+                        TwilioClient.Init(accountSid, authToken);
+
+                        var message = MessageResource.Create(
+                            body: "!!!!!!!!!!!!!!!",
+                            from: new Twilio.Types.PhoneNumber("+13187668291"),
+                            to: new Twilio.Types.PhoneNumber("+xxxxxxxx")
+
+                        );
+                        Console.WriteLine(message.Sid);
                     });
     }
 }

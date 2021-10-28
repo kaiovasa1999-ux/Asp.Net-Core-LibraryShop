@@ -68,7 +68,7 @@
 
             //// Application services
             ////(x => new SendGridEmailSender(apiKey here -> ""))
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:ApiKeu"]));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IBookService, BookService>();
