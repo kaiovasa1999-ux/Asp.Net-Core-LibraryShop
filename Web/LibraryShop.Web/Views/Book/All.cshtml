@@ -30,9 +30,9 @@
         <div class="form-group col-md-4">
             <label asp-for="Sorting">Sorting</label>
             <select asp-for="Sorting" class="form-control">
-                <option value="">
+                @*<option value="">
                     All
-                </option>
+                </option>*@
                 <option value="1">Price</option>
                 <option value="2">Pages</option>
                 <option value="3">Author Name</option>
@@ -88,10 +88,4 @@
 
 
 
-<div class="offset-3 container">
-    <div class="row">
-        <div class="form-group">
-            <a class="btn btn-success " asp-area="" asp-controller="Basket" asp-action="MyBasket">Basket</a>
-        </div>
-    </div>
-</div>
+

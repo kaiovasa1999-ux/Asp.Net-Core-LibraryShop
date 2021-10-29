@@ -19,18 +19,18 @@
                 .ConfigureWebHostDefaults(webBuilder =>
                     {
                         webBuilder.UseStartup<Startup>();
-                        string accountSid = Environment.GetEnvironmentVariable("Hakera");
-                        string authToken = Environment.GetEnvironmentVariable("twilioauth");
 
-                        TwilioClient.Init(accountSid, authToken);
+                        // I Used ENVIROMENT VERIABLES for accountSid and authToken
 
-                        var message = MessageResource.Create(
-                            body: "!!!!!!!!!!!!!!!",
-                            from: new Twilio.Types.PhoneNumber("+13187668291"),
-                            to: new Twilio.Types.PhoneNumber("+xxxxxxxx")
-
-                        );
-                        Console.WriteLine(message.Sid);
+                        // string accountSid = Environment.GetEnvironmentVariable("Hakera");
+                        // string authToken = Environment.GetEnvironmentVariable("twilioauth");
+                        // TwilioClient.Init(accountSid, authToken);
+                        // var message = MessageResource.Create(
+                        //     body: "!!!!!!!!!!!!!!!",
+                        //     from: new Twilio.Types.PhoneNumber("+13187668291"),
+                        //     to: new Twilio.Types.PhoneNumber("+xxxxxxxx")
+                        // );
+                        // Console.WriteLine(message.Sid);
                     });
     }
 }
