@@ -64,19 +64,40 @@
             <div class="card-body">
                 <p class="card-text">@book.Descrption</p>
                 <a asp-action="AboutBook" asp-route-id="@book.Id" class="btn btn-primary">About</a>
-
-                <a asp-controller="Basket" asp-action="AddToBasket" asp-route-id="@book.Id" class="btn btn-success">Buy</a>
+                <i class="bi bi-cart-dash"></i>
+                <a asp-controller="Basket" asp-action="AddToBasket" asp-route-id="@book.Id" class="btn btn-success">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-dash" viewBox="0 0 16 16">
+                        <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z" />
+                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                    </svg>
+                </a>
+             
             </div>
         </div>
     }
 </div>
+@{
+    var x = 1;
+}
 
-
-@if (Model.Books.Count() > 2)
+@if (Model.Books.Count() >= 1)
 {
     <div class="justify-content-center">
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="btn btn-primary @(Model.CurrentPage == Model.FirstPage ? "disabled" : string.Empty)"
+                       asp-controller="Book"
+                       asp-action="All"
+                       asp-route-currentPage="@Model."
+                       asp-route-brand="@Model.Title"
+                       asp-route-searchTerm="@Model.FirstPage"
+                       asp-route-sorting="@((int)Model.Sorting)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                            <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                        </svg>
+                    </a>
+                </li>
                 <li class="page-item disabled">
                     <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
                        asp-controller="Book"
@@ -84,10 +105,14 @@
                        asp-route-currentPage="@(Model.CurrentPage - 1)"
                        asp-route-brand="@Model.Title"
                        asp-route-searchTerm="@Model.SearchTherm"
-                       asp-route-sorting="@((int)Model.Sorting)">Prev</a>
+                       asp-route-sorting="@((int)Model.Sorting)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z" />
+                        </svg>
+                    </a>
                 </li>
                 <li class="page-item active">
-                    <a class="btn btn-primary "
+                    <a class="btn btn-warning "
                        asp-controller="Book"
                        asp-action="All"
                        asp-route-currentPage="@Model.CurrentPage"
@@ -95,14 +120,31 @@
                        asp-route-searchTerm="@Model.SearchTherm"
                        asp-route-sorting="@((int)Model.Sorting)">@Model.CurrentPage</a>
                 </li>
-                <li class="offset-12 page-item">
+                <li class="page-item disabled">
                     <a class="btn btn-primary @(Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty)"
                        asp-controller="Book"
                        asp-action="All"
                        asp-route-currentPage="@(Model.CurrentPage + 1)"
                        asp-route-brand="@Model.Title"
                        asp-route-searchTerm="@Model.SearchTherm"
-                       asp-route-sorting="@((int)Model.Sorting)">Next</a>
+                       asp-route-sorting="@((int)Model.Sorting)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z" />
+                        </svg>
+                    </a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="btn btn-primary @(Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty)"
+                       asp-controller="Book"
+                       asp-action="All"
+                       asp-route-currentPage="@Model.TotalPages"
+                       asp-route-brand="@Model.Title"
+                       asp-route-searchTerm="@Model.SearchTherm"
+                       asp-route-sorting="@((int)Model.Sorting)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                        </svg>
+                    </a>
                 </li>
             </ul>
         </nav>
