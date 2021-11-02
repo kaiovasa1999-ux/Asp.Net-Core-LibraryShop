@@ -102,8 +102,8 @@
                 AllBooksListingAndSortingViewModel.BooksPerPage);
 
             var booksGenres = this.bookService.GetGenerName();
-            var booksTitles = this.bookService.GetAllBooksTitles();
             var totalBooks = this.bookService.GetTotalBooks();
+            var booksTitles = this.bookService.GetAllBooksTitles();
 
             query.Books = queryResult.Books;
             query.Geners = booksGenres;
