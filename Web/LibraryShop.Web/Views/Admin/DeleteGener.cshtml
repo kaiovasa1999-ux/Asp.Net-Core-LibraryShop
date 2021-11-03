@@ -1,0 +1,20 @@
+﻿@model LibraryShop.Web.ViewModels.Administration.Models.GenerFunctionModel
+
+@{ 
+    ViewBag.Title = "Delete Gener";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row form-group">
+    <div class="offset-md-3 col-md-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name">Gener Name:</label>
+                <input asp-for="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Save" />
+        </form>
+    </div>
+</div>

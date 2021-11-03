@@ -36,9 +36,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="MyBooks">My Books</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Dealer" asp-action="Become">Become Dealer</a>
-                        </li>
+                        @if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Dealer" asp-action="Become">Become Dealer</a>
+                            </li>
+                        }
                         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                         {
                             <li class="nav-item">
@@ -49,7 +52,10 @@
                                 <a class="nav-link text-dark" asp-area="Administration" asp-controller="Books" asp-action="Index">Admin Books</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="CreateNewGener">New Gener</a>
+                                <a class="nav-link text-success" asp-area="" asp-controller="Admin" asp-action="CreateNewGener">New Gener</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-danger" asp-area="" asp-controller="Admin" asp-action="DeleteGener">Delete Gener</a>
                             </li>
                         }
 

@@ -17,39 +17,49 @@
             this.adminService = adminService;
         }
 
-        [Authorize(Roles =GlobalConstants.AdministratorRoleName)]
         [HttpGet]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
 
         public IActionResult CreateNewGener()
         {
-            var viewModel = new CreateGenerViewModel();
+            var viewModel = new GenerFunctionModel();
             return this.View(viewModel);
         }
 
         [HttpPost]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public async Task<IActionResult> CreateNewGener(CreateGenerViewModel viewModel)
+        public async Task<IActionResult> CreateNewGener(GenerFunctionModel viewModel)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(viewModel);
             }
 
-            ////var isDealer = this.dealerService.GetDealerIByItUserId(this.User.GetId());
-
-            ////if (isDealer == 0)
-            ////{
-            ////    return this.RedirectToAction("ErrorPage", "View");
-            ////}
-
-            ////var userId = this.User.GetId();
-            ////if (!this.ModelState.IsValid)
-            ////{
-            ////    inputBook.Geners = this.bookService.GetAllGeners();
-            ////    return this.View(inputBook);
-            ////}
-
             await this.adminService.CreateNewGener(viewModel.Name);
+            this.TempData["AddedGener"] = "The gener is Added Succesfully";
+
+            return this.RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [Authorize(Roles =GlobalConstants.AdministratorRoleName)]
+        public IActionResult DeleteGener()
+        {
+            var viewModel = new GenerFunctionModel();
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> DeleteGener(GenerFunctionModel view)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(view);
+            }
+
+            await this.adminService.DeleteGener(view.Name);
+            this.TempData["DeleteMessage"] = "The gener is Delete succesfully!";
 
             return this.RedirectToAction("Index", "Home");
         }

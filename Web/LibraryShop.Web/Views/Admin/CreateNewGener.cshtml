@@ -1,15 +1,18 @@
-﻿@model LibraryShop.Web.ViewModels.Administration.Models.CreateGenerViewModel
+﻿@model LibraryShop.Web.ViewModels.Administration.Models.GenerFunctionModel
+    @{
+    ViewBag.Title = "Add new Gener";
+    }
 
 
-<div class="row">
-    <div class="offset-md-3 col-md-6">
-        <form method="post">
-            <div class="form-group">
-                <label asp-for="Name">Author Name:</label>
-                <input asp-for="Name">
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <input class="btn btn-primary" type="submit" value="Save" />
-        </form>
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="Name">Author Name:</label>
+                    <input asp-for="Name">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Save" />
+            </form>
+        </div>
     </div>
-</div>

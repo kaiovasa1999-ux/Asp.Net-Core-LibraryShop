@@ -8,11 +8,21 @@
 {
     <div class="alert alert-success">@this.TempData["Message"]</div>
 }
+
+@if (this.TempData.ContainsKey("DeleteMessage"))
+{
+    <div class="alert alert-success">@this.TempData["DeleteMessage"]</div>
+}
+@if (this.TempData.ContainsKey("AddedGener"))
+{
+    <div class="alert alert-success">@this.TempData["AddedGener"]</div>
+}
+
+
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
     <p>We have:</p>
 </div>
-
 
 
 <div class="offset-1 container">
@@ -50,7 +60,7 @@
             <img class="offset-4 d-block w-50" src="@Model.BooksImages[2]">
         </div>
         @*<div class="carousel-item">
-            <img class="offset-4 d-block w-50" src="@Model.BooksImages[3]">
-        </div>*@
+                <img class="offset-4 d-block w-50" src="@Model.BooksImages[3]">
+            </div>*@
     </div>
 </div>
