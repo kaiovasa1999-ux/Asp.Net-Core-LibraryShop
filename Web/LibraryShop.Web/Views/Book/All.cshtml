@@ -55,14 +55,24 @@
     </div>
 
 }
-
+@{ 
+    var subStringDescription = string.Empty;
+}
 <div class="row form-group">
     @foreach (var book in Model.Books)
     {
         <div class="card col-md-3" style="width: 18rem;">
             <img class="card-img-top" src="@book.ImageUrl" alt="@book.Title @book.Author">
             <div class="card-body">
-                <p class="card-text">@book.Descrption</p>
+                @if(book.Descrption.Length > 100)
+                {
+                    subStringDescription = book.Descrption.Substring(0,100);
+                }
+                else
+                {
+                    subStringDescription = book.Descrption;
+                }
+                <p class="card-text">@subStringDescription</p>
                 <a asp-action="AboutBook" asp-route-id="@book.Id" class="btn btn-primary">About</a>
                 <i class="bi bi-cart-dash"></i>
                 <a asp-controller="Basket" asp-action="AddToBasket" asp-route-id="@book.Id" class="btn btn-success">
@@ -74,6 +84,7 @@
              
             </div>
         </div>
+        <div class="col-md-1"></div>
     }
 </div>
 

@@ -13,6 +13,8 @@
     <title class="">@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <link href="~/css/Basket.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/carouselItem.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -45,7 +47,7 @@
                         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dealers" asp-action="Index">Admin Panel</a>
+                                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dealers" asp-action="Index">Dealers</a>
                             </li>
 
                             <li class="nav-item">
