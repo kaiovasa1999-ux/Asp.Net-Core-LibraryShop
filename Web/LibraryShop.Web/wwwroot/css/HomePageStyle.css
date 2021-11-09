@@ -1,0 +1,12 @@
+﻿article {
+    border: 1px solid black;
+}
+
+section {
+    border: 3px solid darkblue;
+    padding: 10px;
+}
+    section p {
+        color: red;
+        font-family: sans-serif;
+    }
