@@ -3,10 +3,18 @@
 }
 
 section {
-    border: 3px solid darkblue;
+    border: 3px solid double;
     padding: 10px;
 }
     section p {
-        color: red;
+        color: black;
         font-family: sans-serif;
     }
+
+table th {
+    color: cornflowerblue;
+}
+.carousel-inner > .item > img {
+    width: 640px;
+    height: 360px;
+}

@@ -29,8 +29,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Books</th>
+                <th scope="col">Dealers</th>
+                <th scope="col">Users</th>
+                <th scope="col">Geners</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.TotalBooks</td>
+                <td>@Model.TotalDealers</td>
+                <td>@Model.TotalUsers</td>
+                <td>@Model.TotalBookGeners</td>
+            </tr>
+        </tbody>
+    </table>
+
     <div class="container">
         <section class="col-md-6 offset-3">
+            <h3 class="text-center">Benefits From reading!</h3>
+            <h4 class="text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0z" />
+                </svg>
+            </h4>
             <video controls="controls" width="500">
                 <source src="~/How%20To%20Read%20A%20Book%20A%20Week%20-%203%20PROVEN%20Tricks.mp4" type="video/mp4" />
             </video>
@@ -39,6 +64,48 @@
             </p>
         </section>
     </div>
-    
+    <br />
+    <br />
+    <div class="main-center-block">
+        <div class="head-block">
+
+        </div>
+    </div>
+    <section>
+        <div style="position:relative">
+            <div id="carouselExampleControls" class="carousel slide " data-ride="carousel">
+                <div class="carousel-inner row">
+                    <div class="carousel-item active text-white-50">
+                        <img class="d-block w-100" src="@Model.BookImage[0]">
+                    </div>
+                    <div class="carousel-item text-white-50">
+                        <img class="d-block w-100" src="@Model.BookImage[1]">
+                    </div>
+                    <div class="carousel-item text-white-50">
+                        <img class="d-block w-100" src="@Model.BookImage[2]">
+                    </div>
+                    <div class="carousel-item text-white-50">
+                        <img class="d-block w-100" src="@Model.BookImage[3]">
+                    </div>
+                    <div class="carousel-item text-white-50">
+                        <img class="d-block w-100" src="@Model.BookImage[4]">
+                    </div>
+                    <div class="carousel-item text-white-50">
+                        <img class="d-block w-100" src="@Model.BookImage[5]">
+                    </div>
+
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+    </section>
 </body>
 </html>
