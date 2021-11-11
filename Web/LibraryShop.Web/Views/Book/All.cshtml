@@ -1,164 +1,200 @@
 ﻿@model LibraryShop.Web.ViewModels.Book.AllBooksListingAndSortingViewModel
-
-
-<form method="get">
-    <div class="form-group col-md-4">
-        <label asp-for="Gener">Sort by Gener:</label>
-        <select asp-for="Gener" class="form-control">
-            <option value="">All</option>
-            @foreach (var category in Model.Geners)
+    <link href="~/css/Meta.css" rel="stylesheet" />
+<nav id="site-navigation" class="main-navigation tg-primary-menu tg-primary-menu--style-none tg-extra-menus">
+    <div class="menu">
+        <ul id="primary-menu" class="menu-primary">
+            <li id="menu-item-614" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-9 current_page_item menu-item-614"><a asp-controller="Home" asp-action="Index" aria-current="page">HOME</a></li>
+            <li id="menu-item-854" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-854"><a asp-area="" asp-controller="Book" asp-action="Add">ADD BOOK</a></li>
+            <li id="menu-item-853" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-853"><a asp-area="" asp-controller="Book" asp-action="All">ALL BOOKS</a></li>
+            <li id="menu-item-856" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-856"><a asp-area="" asp-controller="Book" asp-action="MyBooks">MY BOOKS</a></li>
+            @if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                <option value="@category">@category</option>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Dealer" asp-action="Become">Become Dealer</a>
+                </li>
             }
-        </select>
-    </div>
-    <div class="form-group col-md-4">
-        <label asp-for="Title">Title</label>
-        <select asp-for="Title" class="form-control">
-            <option value="">All</option>
-            @foreach (var brand in Model.Titles)
+            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                <option value="@brand">@brand</option>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dealers" asp-action="Index">DEALERS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Books" asp-action="Index">ADMING</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-success" asp-area="" asp-controller="Admin" asp-action="CreateNewGener">NEW GENER</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" asp-area="" asp-controller="Admin" asp-action="DeleteGener">DELETE GENER</a>
+                </li>
             }
-        </select>
+            @*<li id="menu-item-852" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-852"><a href="https://zakrademos.com/book-author/blog/">BLOG</a></li>
+                <li id="menu-item-855" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-855"><a href="https://zakrademos.com/book-author/contact/">CONTACT</a></li>
+                <li class="menu-item tg-header-button-wrap"><a href="#">ORDER NOW</a></li>
+                <li class="menu-item menu-item-has-children tg-menu-extras-wrap"><span class="submenu-expand"><i class="fa fa-ellipsis-v"></i></span><ul class="sub-menu" id="tg-menu-extras"></ul></li>*@
+        </ul>
     </div>
-    <div class="form-group col-md-4">
-        <label asp-for="SearchTherm">Search:</label>
-        <input asp-for="SearchTherm">
-    </div>
-    <div class="row">
+</nav>
+
+    <form method="get">
         <div class="form-group col-md-4">
-            <label asp-for="Sorting">Sorting</label>
-            <select asp-for="Sorting" class="form-control">
-                @*<option value="">
-                        All
-                    </option>*@
-                <option value="1">Price</option>
-                <option value="2">Pages</option>
-                <option value="3">Author Name</option>
-                <option value="4">Year Created</option>
+            <label asp-for="Gener">Sort by Gener:</label>
+            <select asp-for="Gener" class="form-control">
+                <option value="">All</option>
+                @foreach (var category in Model.Geners)
+                {
+                    <option value="@category">@category</option>
+                }
             </select>
         </div>
-    </div>
-</form>
-
-@if (!Model.Books.Any())
-{
-    <div class="jumbotron">
-        <h1 class="display-4">Ooops problem!</h1>
-        <h2 class="text-center text-danger">There aren't any avaiable books in our library by this criteria!</h2>
-        <hr class="my-4">
-        <p class="text-primary">Click on this buttun to add new book!</p>
-        <p class="lead row justify-content-center">
-            <a class="btn btn-primary text-center" asp-controller="Book" asp-action="Add">Add new Book</a>
-        </p>
-    </div>
-
-}
-@{ 
-    var subStringDescription = string.Empty;
-}
-<div class="row form-group">
-    @foreach (var book in Model.Books)
-    {
-        <div class="card col-md-3" style="width: 18rem;">
-            <img class="card-img-top" src="@book.ImageUrl" alt="@book.Title @book.Author">
-            <div class="card-body">
-                @if(book.Descrption.Length > 100)
+        <div class="form-group col-md-4">
+            <label asp-for="Title">Title</label>
+            <select asp-for="Title" class="form-control">
+                <option value="">All</option>
+                @foreach (var brand in Model.Titles)
                 {
-                    subStringDescription = book.Descrption.Substring(0,100);
+                    <option value="@brand">@brand</option>
                 }
-                else
-                {
-                    subStringDescription = book.Descrption;
-                }
-                <p class="card-text">@subStringDescription</p>
-                <a asp-action="AboutBook" asp-route-id="@book.Id" class="btn btn-primary">About</a>
-                <i class="bi bi-cart-dash"></i>
-                <a asp-controller="Basket" asp-action="AddToBasket" asp-route-id="@book.Id" class="btn btn-success">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-dash" viewBox="0 0 16 16">
-                        <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z" />
-                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                    </svg>
-                </a>
-             
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="SearchTherm">Search:</label>
+            <input asp-for="SearchTherm">
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label asp-for="Sorting">Sorting</label>
+                <select asp-for="Sorting" class="form-control">
+                    @*<option value="">
+                            All
+                        </option>*@
+                    <option value="1">Price</option>
+                    <option value="2">Pages</option>
+                    <option value="3">Author Name</option>
+                    <option value="4">Year Created</option>
+                </select>
             </div>
         </div>
-        <div class="col-md-1"></div>
-    }
-</div>
+    </form>
 
-@if (Model.Books.Count() >= 3)
-{
-    <div class="justify-content-center">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="btn btn-primary @(Model.CurrentPage == Model.FirstPage ? "disabled" : string.Empty)"
-                       asp-controller="Book"
-                       asp-action="All"
-                       asp-route-currentPage="@Model."
-                       asp-route-brand="@Model.Title"
-                       asp-route-searchTerm="@Model.FirstPage"
-                       asp-route-sorting="@((int)Model.Sorting)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                            <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+    @if (!Model.Books.Any())
+    {
+        <div class="jumbotron">
+            <h1 class="display-4">Ooops problem!</h1>
+            <h2 class="text-center text-danger">There aren't any avaiable books in our library by this criteria!</h2>
+            <hr class="my-4">
+            <p class="text-primary">Click on this buttun to add new book!</p>
+            <p class="lead row justify-content-center">
+                <a class="btn btn-primary text-center" asp-controller="Book" asp-action="Add">Add new Book</a>
+            </p>
+        </div>
+
+    }
+    @{
+        var subStringDescription = string.Empty;
+    }
+    <div class="row form-group">
+        @foreach (var book in Model.Books)
+        {
+            <div class="card col-md-3" style="width: 18rem;">
+                <img class="card-img-top" src="@book.ImageUrl" alt="@book.Title @book.Author">
+                <div class="card-body">
+                    @if (book.Descrption.Length > 100)
+                    {
+                        subStringDescription = book.Descrption.Substring(0, 100);
+                    }
+                    else
+                    {
+                        subStringDescription = book.Descrption;
+                    }
+                    <p class="card-text">@subStringDescription</p>
+                    <a asp-action="AboutBook" asp-route-id="@book.Id" class="btn btn-primary">About</a>
+                    <i class="bi bi-cart-dash"></i>
+                    <a asp-controller="Basket" asp-action="AddToBasket" asp-route-id="@book.Id" class="btn btn-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-dash" viewBox="0 0 16 16">
+                            <path d="M6.5 7a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z" />
+                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                         </svg>
                     </a>
-                </li>
-                <li class="page-item disabled">
-                    <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
-                       asp-controller="Book"
-                       asp-action="All"
-                       asp-route-currentPage="@(Model.CurrentPage - 1)"
-                       asp-route-brand="@Model.Title"
-                       asp-route-searchTerm="@Model.SearchTherm"
-                       asp-route-sorting="@((int)Model.Sorting)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z" />
-                        </svg>
-                    </a>
-                </li>
-                <li class="page-item active">
-                    <a class="btn btn-warning "
-                       asp-controller="Book"
-                       asp-action="All"
-                       asp-route-currentPage="@Model.CurrentPage"
-                       asp-route-brand="@Model.Title"
-                       asp-route-searchTerm="@Model.SearchTherm"
-                       asp-route-sorting="@((int)Model.Sorting)">@Model.CurrentPage</a>
-                </li>
-                <li class="page-item disabled">
-                    <a class="btn btn-primary @(Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty)"
-                       asp-controller="Book"
-                       asp-action="All"
-                       asp-route-currentPage="@(Model.CurrentPage + 1)"
-                       asp-route-brand="@Model.Title"
-                       asp-route-searchTerm="@Model.SearchTherm"
-                       asp-route-sorting="@((int)Model.Sorting)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z" />
-                        </svg>
-                    </a>
-                </li>
-                <li class="page-item disabled">
-                    <a class="btn btn-primary @(Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty)"
-                       asp-controller="Book"
-                       asp-action="All"
-                       asp-route-currentPage="@Model.TotalPages"
-                       asp-route-brand="@Model.Title"
-                       asp-route-searchTerm="@Model.SearchTherm"
-                       asp-route-sorting="@((int)Model.Sorting)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                        </svg>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        }
     </div>
 
-}
+    @if (Model.Books.Count() >= 3)
+    {
+        <div class="justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="btn btn-primary @(Model.CurrentPage == Model.FirstPage ? "disabled" : string.Empty)"
+                           asp-controller="Book"
+                           asp-action="All"
+                           asp-route-currentPage="@Model."
+                           asp-route-brand="@Model.Title"
+                           asp-route-searchTerm="@Model.FirstPage"
+                           asp-route-sorting="@((int)Model.Sorting)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+                           asp-controller="Book"
+                           asp-action="All"
+                           asp-route-currentPage="@(Model.CurrentPage - 1)"
+                           asp-route-brand="@Model.Title"
+                           asp-route-searchTerm="@Model.SearchTherm"
+                           asp-route-sorting="@((int)Model.Sorting)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223z" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="btn btn-warning "
+                           asp-controller="Book"
+                           asp-action="All"
+                           asp-route-currentPage="@Model.CurrentPage"
+                           asp-route-brand="@Model.Title"
+                           asp-route-searchTerm="@Model.SearchTherm"
+                           asp-route-sorting="@((int)Model.Sorting)">@Model.CurrentPage</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="btn btn-primary @(Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty)"
+                           asp-controller="Book"
+                           asp-action="All"
+                           asp-route-currentPage="@(Model.CurrentPage + 1)"
+                           asp-route-brand="@Model.Title"
+                           asp-route-searchTerm="@Model.SearchTherm"
+                           asp-route-sorting="@((int)Model.Sorting)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z" />
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="btn btn-primary @(Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty)"
+                           asp-controller="Book"
+                           asp-action="All"
+                           asp-route-currentPage="@Model.TotalPages"
+                           asp-route-brand="@Model.Title"
+                           asp-route-searchTerm="@Model.SearchTherm"
+                           asp-route-sorting="@((int)Model.Sorting)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    }
 
 
 
