@@ -1,5 +1,7 @@
 ﻿@model LibraryShop.Web.ViewModels.Home.IndexPageStatisticsViewModel
 @using LibraryShop.Common;
+@using LibraryShop.Common
+
 <!doctype html>
 <html lang="en-US">
 
@@ -29,7 +31,22 @@
 </head>
 
 <body data-rsssl=1 class="home page-template page-template-page-templates page-template-pagebuilder page-template-page-templatespagebuilder-php page page-id-9 wp-custom-logo everest-forms-no-js tg-site-layout--stretched tg-container--wide has-page-header has-breadcrumbs elementor-default elementor-kit-916 elementor-page elementor-page-9">
+    @{
+        this.ViewData["Title"] = "Home Page";
+    }
+    @if (this.TempData.ContainsKey("Message"))
+    {
+        <div class="alert alert-success">@this.TempData["Message"]</div>
+    }
 
+    @if (this.TempData.ContainsKey("DeleteMessage"))
+    {
+        <div class="alert alert-success">@this.TempData["DeleteMessage"]</div>
+    }
+    @if (this.TempData.ContainsKey("AddedGener"))
+    {
+        <div class="alert alert-success">@this.TempData["AddedGener"]</div>
+    }
 
     <div id="page" class="site tg-site">
         <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
@@ -90,7 +107,7 @@
                                                 <div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-b98b5c8 animated-fast elementor-invisible" data-id="b98b5c8" data-element_type="column" data-settings="{&quot;animation&quot;:&quot;fadeInUp&quot;}">
                                                     <div class="elementor-column-wrap elementor-element-populated">
                                                         <div class="elementor-widget-wrap">
-                                                           
+
                                                             <section class="elementor-section elementor-inner-section elementor-element elementor-element-2e828fd elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="2e828fd" data-element_type="section">
                                                                 <div class="elementor-container elementor-column-gap-default">
                                                                     <div class="elementor-row">
@@ -221,7 +238,7 @@
                                                                                     <div class="elementor-element elementor-element-813778a elementor-widget elementor-widget-image" data-id="813778a" data-element_type="widget" data-widget_type="image.default">
                                                                                         <div class="elementor-widget-container">
                                                                                             <div class="elementor-image">
-                                                                                                <img width="230" height="346"src="@Model.BookImage[1]"/>
+                                                                                                <img width="230" height="346" src="@Model.BookImage[1]" />
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -234,7 +251,7 @@
                                                                                         <div class="elementor-widget-container">
                                                                                             <ul>
                                                                                                 <li>
-                                                                                                   <a asp-controller="Book" asp-action="FindByImage" asp-route-id="@Model.BookImage[0]">About</a>
+                                                                                                    <a asp-controller="Book" asp-action="FindByImage" asp-route-id="@Model.BookImage[0]">About</a>
                                                                                                 </li>
                                                                                             </ul>
                                                                                         </div>
