@@ -120,7 +120,6 @@
             {
                 return this.View();
             }
-
             var book = this.bookService.GetDetailsByImage(image);
             return this.View(book);
         }
