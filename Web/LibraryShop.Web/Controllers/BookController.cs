@@ -113,6 +113,18 @@
             return this.View(query);
         }
 
+        [HttpPost]
+        public IActionResult FindByImage(string image)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            var book = this.bookService.GetDetailsByImage(image);
+            return this.View(book);
+        }
+
         [Authorize]
         public IActionResult EditBook(int id)
         {

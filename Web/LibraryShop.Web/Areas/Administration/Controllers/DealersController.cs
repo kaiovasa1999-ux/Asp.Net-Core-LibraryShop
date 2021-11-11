@@ -12,8 +12,8 @@
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
 
-    [Area("Administration")]
-    public class DealersController : AdministrationController
+    [Area("DealerArea")]
+    public class DealersController : DealerControllerArea
     {
         private readonly IDeletableEntityRepository<Dealer> dataRepository;
 

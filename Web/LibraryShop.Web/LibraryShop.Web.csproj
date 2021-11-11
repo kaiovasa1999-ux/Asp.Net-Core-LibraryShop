@@ -42,4 +42,10 @@
     <ProjectReference Include="..\LibraryShop.Web.Infrastructure\LibraryShop.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\LibraryShop.Web.ViewModels\LibraryShop.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\DealerArea\Data\" />
+    <Folder Include="Areas\DealerArea\Models\" />
+    <Folder Include="Areas\DealerArea\Views\" />
+  </ItemGroup>
 </Project>
