@@ -42,7 +42,8 @@
 
             if (this.dealrsRepository.All().Any(d => d.UserId == userId))
             {
-                throw new Exception("You are allready a dealer");
+                this.TempData["DealeraMessage"] = "You are already a Dealer!!";
+                return this.RedirectToAction("index", "Home");
             }
 
             var dealerDarta = new Dealer()

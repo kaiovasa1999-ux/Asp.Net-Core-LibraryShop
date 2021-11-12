@@ -1,11 +1,12 @@
 ﻿@model LibraryShop.Web.ViewModels.Book.AllBooksListingAndSortingViewModel
 @using LibraryShop.Data;
 @using LibraryShop.Data.Common.Repositories;
-@{ 
+@{
     var isDealer = this.User.IsInRole(GlobalConstants.DealerRoleName);
     var isAdmin = this.User.IsInRole(GlobalConstants.AdministratorRoleName);
 }
 <link href="~/css/Meta.css" rel="stylesheet" />
+<link href="~/css/Basket.css" rel="stylesheet" />
 <nav id="site-navigation" class="main-navigation tg-primary-menu tg-primary-menu--style-none tg-extra-menus">
     <div class="menu row">
         <ul id="primary-menu" class="menu-primary">
@@ -19,68 +20,57 @@
             }
             @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dealers" asp-action="Index">DEALERS</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Books" asp-action="Index">ADMING</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-success" asp-area="" asp-controller="Admin" asp-action="CreateNewGener">NEW GENER</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-danger" asp-area="" asp-controller="Admin" asp-action="DeleteGener">DELETE GENER</a>
-                </li>
+                <li> <a class="nav-link text-dark" asp-area="Administration" asp-controller="Admin" asp-action="Index">DEALERS</a></li>
+                <li> <a class="nav-link text-dark" asp-area="Administration" asp-controller="Books" asp-action="Index">ADMIN</a></li>
+                <li> <a class="nav-link text-success" asp-area="" asp-controller="Admin" asp-action="CreateNewGener">NEW GENER</a></li>
+                <li> <a class="nav-link text-danger" asp-area="" asp-controller="Admin" asp-action="DeleteGener">DELETE GENER</a></li>
             }
-            @*<li id="menu-item-852" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-852"><a href="https://zakrademos.com/book-author/blog/">BLOG</a></li>
-        <li id="menu-item-855" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-855"><a href="https://zakrademos.com/book-author/contact/">CONTACT</a></li>
-        <li class="menu-item tg-header-button-wrap"><a href="#">ORDER NOW</a></li>
-        <li class="menu-item menu-item-has-children tg-menu-extras-wrap"><span class="submenu-expand"><i class="fa fa-ellipsis-v"></i></span><ul class="sub-menu" id="tg-menu-extras"></ul></li>*@
         </ul>
     </div>
 </nav>
-
-<form method="get">
-    <div class="form-group col-md-4">
-        <label asp-for="Gener">Sort by Gener:</label>
-        <select asp-for="Gener" class="form-control">
-            <option value="">All</option>
-            @foreach (var category in Model.Geners)
-            {
-                <option value="@category">@category</option>
-            }
-        </select>
-    </div>
-    <div class="form-group col-md-4">
-        <label asp-for="Title">Title</label>
-        <select asp-for="Title" class="form-control">
-            <option value="">All</option>
-            @foreach (var brand in Model.Titles)
-            {
-                <option value="@brand">@brand</option>
-            }
-        </select>
-    </div>
-    <div class="form-group col-md-4">
-        <label asp-for="SearchTherm">Search:</label>
-        <input asp-for="SearchTherm">
-    </div>
-    <div class="row">
+<div class="col">
+    <form method="get">
         <div class="form-group col-md-4">
-            <label asp-for="Sorting">Sorting</label>
-            <select asp-for="Sorting" class="form-control">
-                @*<option value="">
-                        All
-                    </option>*@
-                <option value="1">Price</option>
-                <option value="2">Pages</option>
-                <option value="3">Author Name</option>
-                <option value="4">Year Created</option>
+            <label asp-for="Gener">Sort by Gener:</label>
+            <select asp-for="Gener" class="form-control">
+                <option value="">All</option>
+                @foreach (var category in Model.Geners)
+                {
+                    <option value="@category">@category</option>
+                }
             </select>
         </div>
-    </div>
-</form>
+        <div class="form-group col-md-4">
+            <label asp-for="Title">Title</label>
+            <select asp-for="Title" class="form-control">
+                <option value="">All</option>
+                @foreach (var brand in Model.Titles)
+                {
+                    <option value="@brand">@brand</option>
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="SearchTherm">Search:</label>
+            <input asp-for="SearchTherm">
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label asp-for="Sorting">Sorting</label>
+                <select asp-for="Sorting" class="form-control">
+                    @*<option value="">
+                            All
+                        </option>*@
+                    <option value="1">Price</option>
+                    <option value="2">Pages</option>
+                    <option value="3">Author Name</option>
+                    <option value="4">Year Created</option>
+                </select>
+            </div>
+        </div>
+    </form>
+
+</div>
 
 @if (!Model.Books.Any())
 {
@@ -200,8 +190,8 @@
 
 }
 
-
-
+<partial name="_PartialFourther" />
+<partial name="_PartialScripts" />
 
 
 

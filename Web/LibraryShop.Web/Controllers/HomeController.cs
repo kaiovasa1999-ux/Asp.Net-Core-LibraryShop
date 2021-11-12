@@ -2,6 +2,7 @@
 {
     using System.Diagnostics;
 
+    using LibraryShop.Services.Data.BookService;
     using LibraryShop.Services.Data.HomeService;
     using LibraryShop.Web.ViewModels;
     using LibraryShop.Web.ViewModels.Book;
@@ -11,18 +12,27 @@
     public class HomeController : BaseController
     {
         private readonly IHomeService homeService;
+        private readonly IBookService bookService;
 
-        public HomeController(IHomeService homeService)
+        public HomeController(IHomeService homeService, IBookService bookService)
         {
+            this.bookService = bookService;
             this.homeService = homeService;
         }
 
         public IActionResult Index()
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             var viewModel = new IndexPageStatisticsViewModel();
             viewModel = this.homeService.GetStatistics();
             viewModel.BookImage = this.homeService.GetBooksImagesRandom();
             viewModel.Books = this.homeService.GetAllBooksInfo();
+            viewModel.Authors = this.bookService.GetAllAuthorsNames();
+
             return this.View(viewModel);
         }
 

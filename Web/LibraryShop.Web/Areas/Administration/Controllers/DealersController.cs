@@ -12,7 +12,7 @@
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
 
-    [Area("DealerArea")]
+    [Area("Administration")]
     public class DealersController : DealerControllerArea
     {
         private readonly IDeletableEntityRepository<Dealer> dataRepository;
