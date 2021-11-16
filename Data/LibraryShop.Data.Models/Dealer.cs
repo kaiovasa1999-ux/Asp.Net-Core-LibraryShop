@@ -17,6 +17,6 @@
 
         public ICollection<Book> BooksAdded { get; set; }
 
-        public ApplicationUser DealerId { get; set; }
+        public string UserId { get; set; }
     }
 }
