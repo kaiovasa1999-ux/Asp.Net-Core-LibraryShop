@@ -16,6 +16,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.6" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>
@@ -29,6 +31,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\LibraryShop.Data\LibraryShop.Data.csproj" />
     <ProjectReference Include="..\..\Services\LibraryShop.Services.Data\LibraryShop.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Web\LibraryShop.Web\LibraryShop.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\Api\" />
   </ItemGroup>
 
 </Project>

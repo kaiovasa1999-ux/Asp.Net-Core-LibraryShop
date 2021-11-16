@@ -5,6 +5,7 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using CommandLine;
     using LibraryShop.Data;
     using LibraryShop.Data.Common;
     using LibraryShop.Data.Common.Repositories;
@@ -13,9 +14,6 @@
     using LibraryShop.Data.Seeding;
     using LibraryShop.Services.Data;
     using LibraryShop.Services.Messaging;
-
-    using CommandLine;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
