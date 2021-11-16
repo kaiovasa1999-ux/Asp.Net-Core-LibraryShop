@@ -98,6 +98,7 @@
             }
             else
             {
+                app.UseWebSockets();
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
                 ////app.UseExceptionHandler("/Home/Error");

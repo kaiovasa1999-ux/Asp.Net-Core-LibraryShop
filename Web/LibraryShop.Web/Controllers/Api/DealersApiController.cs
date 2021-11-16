@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
+
     using LibraryShop.Common;
     using LibraryShop.Data.Common.Repositories;
     using LibraryShop.Data.Models;
@@ -40,6 +42,22 @@
             }
 
             return dealer;
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var dealer = this.dealersRepository.All().FirstOrDefault(d => d.Id == id);
+
+            if (dealer == null)
+            {
+                return this.NotFound();
+            }
+
+            this.dealersRepository.Delete(dealer);
+            await this.dealersRepository.SaveChangesAsync();
+
+            return this.NoContent();
         }
     }
 }
