@@ -42,7 +42,7 @@
         }
 
         [HttpGet]
-        [Authorize(Roles =GlobalConstants.AdministratorRoleName)]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public IActionResult DeleteGener()
         {
             var viewModel = new GenerFunctionModel();
@@ -62,6 +62,35 @@
             this.TempData["DeleteMessage"] = "The gener is Delete succesfully!";
 
             return this.RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public IActionResult DeleteDealer()
+        {
+            var viewModel = new DeleteDealerModel();
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public IActionResult DeleteDealer(int dealerId)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest();
+            }
+
+            if (dealerId == 0)
+            {
+                return this.RedirectToAction("Index", "Home");
+                //return this.NotFound();
+            }
+
+            this.adminService.DeleteDealerById(dealerId);
+            this.TempData["DealerDeleted"] = "Dealer was deletede succsefully";
+            return this.RedirectToAction("Index", "Home");
+
         }
     }
 }

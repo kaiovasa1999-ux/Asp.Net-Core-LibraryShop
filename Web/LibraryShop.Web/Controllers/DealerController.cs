@@ -1,4 +1,4 @@
-﻿         namespace LibraryShop.Web.Controllers
+﻿namespace LibraryShop.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -62,10 +62,5 @@
         {
             return this.View();
         }
-
-        ////private bool IsDealer()
-        ////{
-        ////    return this.data.Dealers.Any(d => d.UserId == this.User.GetId());
-        ////}
     }
 }

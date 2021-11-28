@@ -11,10 +11,15 @@
     public class AdminService : IAdminService
     {
         private readonly IDeletableEntityRepository<Genre> genersRepository;
+        private readonly IDeletableEntityRepository<Dealer> dealersRepository;
 
-        public AdminService(IDeletableEntityRepository<Genre> genersRepository)
+
+        public AdminService(
+            IDeletableEntityRepository<Genre> genersRepository,
+            IDeletableEntityRepository<Dealer> dealersRepository)
         {
             this.genersRepository = genersRepository;
+            this.dealersRepository = dealersRepository;
         }
 
         public async Task CreateNewGener(string generName)
@@ -27,6 +32,13 @@
             var gener = new Genre { Name = generName };
             await this.genersRepository.AddAsync(gener);
             await this.genersRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteDealerById(int dealerId)
+        {
+            var dealer = this.dealersRepository.All().FirstOrDefault(d => d.Id == dealerId);
+            this.dealersRepository.Delete(dealer);
+            await this.dealersRepository.SaveChangesAsync();
         }
 
         public async Task DeleteGener(string generName)

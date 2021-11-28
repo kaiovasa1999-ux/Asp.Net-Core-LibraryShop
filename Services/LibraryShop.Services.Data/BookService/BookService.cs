@@ -125,27 +125,6 @@
             return authors;
         }
 
-        // TODO: Have to insert all Scaffiolded controllers functionality in services!!!
-
-        ////public async Task Details(int? id)
-        ////{
-        ////        if (id == null)
-        ////        {
-        ////        throw new Exception("Not foind");
-        ////        }
-
-        ////        var book = await this.booksRepository.All()
-        ////            .Contains(b => b.Dealer)
-        ////            .Include(b => b.Genre)
-        ////            .FirstOrDefaultAsync(m => m.Id == id);
-        ////        if (book == null)
-        ////        {
-        ////            return this.NotFound();
-        ////        }
-
-        ////        return book;
-        ////}
-
         public IEnumerable<string> GetAllBooksTitles()
         {
             return this.booksRepository.All().Distinct()

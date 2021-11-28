@@ -141,10 +141,8 @@ namespace LibraryShop.Data.Migrations
 
             modelBuilder.Entity("LibraryShop.Data.Models.Basket", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -158,17 +156,15 @@ namespace LibraryShop.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TotalPrice")
-                        .HasColumnType("int");
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Baskets");
                 });
@@ -183,8 +179,8 @@ namespace LibraryShop.Data.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("BasketId")
-                        .HasColumnType("int");
+                    b.Property<string>("BasketId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -216,6 +212,9 @@ namespace LibraryShop.Data.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("YearCreated")
                         .HasColumnType("datetime2");
 
@@ -242,9 +241,6 @@ namespace LibraryShop.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DealerIdId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
@@ -260,9 +256,10 @@ namespace LibraryShop.Data.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("DealerIdId");
+                    b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
@@ -434,15 +431,6 @@ namespace LibraryShop.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("LibraryShop.Data.Models.Basket", b =>
-                {
-                    b.HasOne("LibraryShop.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("LibraryShop.Data.Models.Book", b =>
                 {
                     b.HasOne("LibraryShop.Data.Models.Basket", null)
@@ -464,15 +452,6 @@ namespace LibraryShop.Data.Migrations
                     b.Navigation("Dealer");
 
                     b.Navigation("Genre");
-                });
-
-            modelBuilder.Entity("LibraryShop.Data.Models.Dealer", b =>
-                {
-                    b.HasOne("LibraryShop.Data.Models.ApplicationUser", "DealerId")
-                        .WithMany()
-                        .HasForeignKey("DealerIdId");
-
-                    b.Navigation("DealerId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

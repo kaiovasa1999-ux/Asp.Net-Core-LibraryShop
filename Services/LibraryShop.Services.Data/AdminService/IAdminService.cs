@@ -9,5 +9,7 @@
         Task CreateNewGener(string generName);
 
         Task DeleteGener(string generName);
+
+        Task DeleteDealerById(int dealerId);
     }
 }
