@@ -84,7 +84,8 @@
             if (dealerId == 0)
             {
                 return this.RedirectToAction("Index", "Home");
-                //return this.NotFound();
+
+                // return this.NotFound();
             }
 
             this.adminService.DeleteDealerById(dealerId);
